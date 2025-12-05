@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:freshmart/Models/bill_model.dart';
+import 'package:freshmart/Models/category_nofification_model.dart';
 import 'package:freshmart/Models/ordermodel.dart';
+import 'package:freshmart/Models/sub_category_notifiaction_model.dart';
 import 'package:freshmart/utils/shared_pref.dart';
 import 'package:http/http.dart' as http;
 import '../Models/category_model.dart';
@@ -273,5 +275,52 @@ class MainApiService {
     } else {
       return {"status": "error", "message": "Failed: ${response.statusCode}"};
     }
+  }
+
+  // CATEGORY NOTIFICATION
+
+  static Future<CategoryNotificationModel?> fetchCategoryNotification(
+    int catId,
+  ) async {
+    final uri = Uri.parse(
+      "https://design-pods.com/flatgrocery/public/getcategory_notification.php?category_id=$catId",
+    );
+
+    final headers = await _buildHeaders();
+
+    final response = await http
+        .get(uri, headers: headers)
+        .timeout(const Duration(seconds: 15));
+
+    if (response.statusCode != 200) return null;
+
+    final jsonData = jsonDecode(response.body);
+
+    return CategoryNotificationModel.fromJson(
+      Map<String, dynamic>.from(jsonData),
+    );
+  }
+
+  // SUBCATEGORY NOTIFICATION
+  static Future<SubCategoryNotificationModel?> fetchSubCategoryNotification(
+    int subCatId,
+  ) async {
+    final uri = Uri.parse(
+      "https://design-pods.com/flatgrocery/public/notificationpage_api.php?subcat=$subCatId",
+    );
+
+    final headers = await _buildHeaders();
+
+    final response = await http
+        .get(uri, headers: headers)
+        .timeout(const Duration(seconds: 15));
+
+    if (response.statusCode != 200) return null;
+
+    final jsonData = jsonDecode(response.body);
+
+    return SubCategoryNotificationModel.fromJson(
+      Map<String, dynamic>.from(jsonData),
+    );
   }
 }

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:freshmart/Providers/authprovider.dart';
 import 'package:freshmart/Providers/bill_details_provider.dart';
 import 'package:freshmart/Providers/bill_provider.dart';
+import 'package:freshmart/Providers/category_notification_provider.dart';
 import 'package:freshmart/Providers/category_product_provider.dart';
 import 'package:freshmart/Providers/category_provider.dart';
 import 'package:freshmart/Providers/create_acc_provider.dart';
 import 'package:freshmart/Providers/order_page_provider.dart';
 import 'package:freshmart/Providers/place_order_provider.dart';
+import 'package:freshmart/Providers/subcategory_notification_provider.dart';
 
 import 'package:freshmart/Providers/weight_provider.dart';
 import 'package:freshmart/Screens/homepage.dart';
@@ -40,6 +42,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => OrderProvider()..loadOrders()),
         ChangeNotifierProvider(create: (_) => PlaceOrderProvider()),
         ChangeNotifierProvider(create: (_) => BillDetailProvider()),
+        ChangeNotifierProvider(create: (_) => CategoryNotificationProvider()),
+        ChangeNotifierProvider(
+          create: (_) => SubCategoryNotificationProvider(),
+        ),
       ],
       child: MaterialApp(
         theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),

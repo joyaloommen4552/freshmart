@@ -16,7 +16,7 @@ class BillModel {
       billId: json['bill_id'] ?? "",
       customerName: json['customer_name'] ?? "",
       date: json['date'] ?? "",
-      billImageUrl: json['bill_image_url'] ?? "",
+      billImageUrl: (json['bill_image_url'] ?? "").toString().trim(),
     );
   }
 }
