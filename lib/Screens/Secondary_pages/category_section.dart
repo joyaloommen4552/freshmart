@@ -79,7 +79,10 @@ class _CategorySectionState extends State<CategorySection> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white, // ← 1. Make bottom sheet background WHITE
+      barrierColor: Colors.black, // ← 2. Make backdrop DARK
+      isDismissible: true,
+      enableDrag: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
       ),
@@ -95,6 +98,7 @@ class _CategorySectionState extends State<CategorySection> {
   }
 
   void _openNotificationPage(BuildContext context, int id, bool isSub) {
+    // Simply navigate without preloading
     Navigator.push(
       context,
       MaterialPageRoute(
